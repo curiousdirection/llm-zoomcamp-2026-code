@@ -7,7 +7,13 @@ authors = [
     { name = "David", email = "12038670+curiousdirection@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "jupyter>=1.1.1",
+    "minsearch>=0.2.0",
+    "openai>=3.39.0",
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+]
 
 [project.scripts]
 llm-zoomcamp-2026-code = "llm_zoomcamp_2026_code:main"
