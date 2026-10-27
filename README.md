@@ -1,3 +1,5 @@
 # llm zoomcamp 2026 code
 
-- `uv run jupyter notebook`
+## notebooks
+
+- run in vscode directly otherwise run `uv run jupyter notebook`
