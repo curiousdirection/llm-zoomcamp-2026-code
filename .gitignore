@@ -17,3 +17,12 @@ dist/
 
 # OS / editor junk
 .DS_Store
+
+# Local data / generated artifacts
+*.db
+*.sqlite
+*.sqlite3
+
+# Env variants (keep the template)
+.env.*
+!.env.template
