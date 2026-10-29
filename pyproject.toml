@@ -1,25 +1,7 @@
-[project]
-name = "llm-zoomcamp-2026-code"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-authors = [
-    { name = "David", email = "12038670+curiousdirection@users.noreply.github.com" }
-]
-requires-python = ">=3.12"
-dependencies = [
-    "gitsource>=0.0.5",
+[tool.uv.workspace]
+members = ["01-agentic-rag", "02-vector-search"]
+
+[dependency-groups]
+dev = [
     "jupyter>=1.1.1",
-    "minsearch>=0.2.0",
-    "openai>=3.39.0",
-    "python-dotenv>=1.2.4",
-    "requests>=2.34.2",
-    "sqlitesearch>=0.3.0",
 ]
-
-[project.scripts]
-llm-zoomcamp-2026-code = "llm_zoomcamp_2026_code:main"
-
-[build-system]
-requires = ["uv_build>=0.13.5,<0.14.0"]
-build-backend = "uv_build"

@@ -1,0 +1,21 @@
+[project]
+name = "vector-search"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "minsearch>=0.2.0",
+    "openai>=3.39.0",
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+    "sentence-transformers>=6.2.0",
+    "torch>=2.15.0",
+]
+
+# CPU-only torch: the default PyPI wheels bundle CUDA (several GB), even on aarch64
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
