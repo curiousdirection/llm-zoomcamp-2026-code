@@ -1,0 +1,34 @@
+schema_version: 2
+content_id: e79727f3-f540-4176-ae98-9b9cb42abdc7
+slug: llm-zoomcamp
+title: LLM Zoomcamp
+current_cohort: "2026"
+cohorts:
+  - identifier: "2026"
+    content: root
+  - identifier: "2025"
+    content: cohorts/2025
+    legacy: true
+  - identifier: "2024"
+    content: cohorts/2024
+    legacy: true
+description: |
+  LLM Zoomcamp is a free, hands-on course on building real-world applications with Large Language Models. You use hosted LLMs to build, evaluate, and monitor production-style RAG systems, working through agentic RAG, vector search, orchestration, evaluation, and monitoring before finishing with a capstone project.
+
+  LLMs themselves are treated as black boxes: the course is for people who want to build with LLMs rather than train them. Each cohort runs once a year and lasts about ten weeks, and all materials stay available for self-paced study in between.
+outcome: Build, evaluate, and monitor production-style LLM applications.
+starting_point: You want to turn questions over your own documents into a working application.
+prerequisites: You can write Python and use the command line, with some Docker familiarity. You don't need prior ML or LLM experience.
+progression:
+  - heading: I have documents and questions, but no working application
+    description: I want an LLM to answer from my own data instead of relying on a generic chat interface.
+  - heading: I connect retrieval, generation, and evaluation
+    description: I build RAG and agentic workflows, then measure, improve, and monitor how they perform.
+  - heading: I ship a production-style LLM application
+    description: I turn a real dataset into an evaluated and monitored application that other people can use.
+urls:
+  repository: https://github.com/DataTalksClub/llm-zoomcamp
+  docs: https://datatalks.club/docs/courses/llm-zoomcamp/
+  faq: https://datatalks.club/faq/llm-zoomcamp.html
+hashtag: llmzoomcamp
+published: true
