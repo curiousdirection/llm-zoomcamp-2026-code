@@ -28,5 +28,11 @@
     "statusBar.debuggingForeground": "#e7e7e7",
     "statusBar.inactiveBackground": "#604560"
   },
-  "peacock.color": "#604560"
+  "peacock.color": "#604560",
+  "files.readonlyInclude": {
+    "course/**": true
+  },
+  "files.watcherExclude": {
+    "course/**": true
+  }
 }

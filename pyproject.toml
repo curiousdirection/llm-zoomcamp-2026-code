@@ -5,3 +5,10 @@ members = ["01-agentic-rag", "02-vector-search"]
 dev = [
     "jupyter>=1.1.1",
 ]
+
+# course/ is a git subtree copy of the upstream course repo, not our code
+[tool.ruff]
+extend-exclude = ["course"]
+
+[tool.pyright]
+exclude = ["course", "**/node_modules", "**/__pycache__", "**/.*"]
