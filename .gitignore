@@ -24,6 +24,7 @@ dist/
 *.sqlite3
 *.db-shm
 *.db-wal
+models/
 
 # Env variants (keep the template)
 .env.*
