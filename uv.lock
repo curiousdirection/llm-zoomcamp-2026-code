@@ -3116,6 +3116,7 @@ name = "vector-search"
 version = "0.1.0"
 source = { virtual = "02-vector-search" }
 dependencies = [
+    { name = "gitsource" },
     { name = "minsearch" },
     { name = "onnxruntime" },
     { name = "openai" },
@@ -3134,6 +3135,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "gitsource", specifier = ">=0.0.5" },
     { name = "minsearch", specifier = ">=0.2.0" },
     { name = "onnxruntime", specifier = ">=1.31.1" },
     { name = "openai", specifier = ">=3.39.0" },
