@@ -1,5 +1,5 @@
 [tool.uv.workspace]
-members = ["01-agentic-rag", "02-vector-search"]
+members = ["01-agentic-rag", "02-vector-search", "04-evaluation"]
 
 [dependency-groups]
 dev = [
