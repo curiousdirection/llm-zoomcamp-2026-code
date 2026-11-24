@@ -1,6 +1,6 @@
 ---
 name: add-lesson
-description: Add a course lesson to its module's lesson notebook (<module>/lesson/lesson.ipynb) - copies the lesson's markdown verbatim with python blocks as unrun code cells, scaffolds the module folder on first use, and checks the lesson's helper files and imports. Use when the user asks to add/prep/start a lesson, given a llm-zoomcamp GitHub URL like .../04-evaluation/02-ground-truth.md or a lesson number.
+description: Add a course lesson to its module's lesson notebook in <module>/lesson/ - copies the lesson's markdown verbatim with python blocks as unrun code cells, scaffolds the module folder on first use, and checks the lesson's helper files and imports. Use when the user asks to add/prep/start a lesson, given a llm-zoomcamp GitHub URL like .../04-evaluation/02-ground-truth.md or a lesson number.
 ---
 
 # Add a lesson to the lesson notebook
@@ -31,15 +31,18 @@ Skip if `<module>/` exists. Otherwise mirror `02-vector-search` / `04-evaluation
 
 ## 3. Append the lesson
 
-From the repo root:
+Append to the notebook holding the previous lesson (`lesson.ipynb` for a new module). Some modules
+split into numbered topic notebooks (`04-evaluation/lesson/01-ground-truth.ipynb`,
+`02-search-eval.ipynb`). If the target doesn't seem right for this lesson, ask the user where it
+should go.
 
 ```bash
-python3 .claude/skills/add-lesson/build_notebook.py <module> <NN> [<NN> ...]
+python3 .claude/skills/add-lesson/build_notebook.py <module> <NN> [<NN> ...] [--notebook <path>]
 ```
 
-It creates the notebook with the module header cell if needed, and skips lessons already present.
-Do a dry run with `--notebook /tmp/x.ipynb` if unsure. Never hand-edit the copied text: keep it
-verbatim, including the course's model names in code (e.g. `gpt-5.4-mini`).
+Run it from the repo root. It defaults to `<module>/lesson/lesson.ipynb`, creates the notebook if
+needed, and skips lessons already present. Never hand-edit the copied text: keep it verbatim,
+including the course's model names in code (e.g. `gpt-5.4-mini`).
 
 ## 4. Check what the lesson needs
 

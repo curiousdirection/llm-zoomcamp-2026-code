@@ -3,7 +3,7 @@
 Reads course/<module>/<NN>-*.md and appends it to <module>/lesson/lesson.ipynb in the
 layout used by 02-vector-search/lesson/lesson.ipynb:
 
-- module header cell (created with the notebook): title + list of every lesson
+- module header cell: title + list of the lessons in this notebook (rebuilt on every run)
 - per lesson: `---` + `# Lesson NN: Title` + Source/Video line + text before the first `##`
 - one markdown cell per `##` section; each ```python block becomes its own (unrun) code cell,
   other fenced blocks (bash, toml, text...) stay inside the markdown
@@ -122,11 +122,9 @@ def main():
     else:
         nb = {'cells': [], 'metadata': KERNEL_METADATA, 'nbformat': 4, 'nbformat_minor': 5}
     nb['cells'] = [c for c in nb['cells'] if ''.join(c['source']).strip()]  # drop blank placeholder cells
-    if not nb['cells']:
-        listing = '\n'.join(f'- **Lesson {n}** - {t} (`{f}`)' for n, t, f in lessons)
-        nb['cells'].append(md(
-            f'# {module_title}\n\nLessons from [`course/{args.module}`]({course_rel}/{args.module}/), '
-            f'one section per lesson:\n\n{listing}'))
+    old_header = {}
+    if nb['cells'] and ''.join(nb['cells'][0]['source']).startswith('# Module'):
+        old_header = nb['cells'].pop(0)  # rebuilt below
 
     for num in args.lessons:
         num = num.zfill(2)
@@ -139,6 +137,15 @@ def main():
         nb['cells'] += cells
         n_code = sum(c['cell_type'] == 'code' for c in cells)
         print(f'Lesson {num}: added {len(cells)} cells ({n_code} code)')
+
+    present = {m for c in nb['cells'] for m in re.findall(r'^# Lesson (\d+):', ''.join(c['source']), re.M)}
+    listing = '\n'.join(f'- **Lesson {n}** - {t} (`{f}`)' for n, t, f in lessons if n in present)
+    header = md(
+        f'# {module_title}\n\nLessons from [`course/{args.module}`]({course_rel}/{args.module}/) '
+        f'in this notebook, one section per lesson:\n\n{listing}')
+    if 'id' in old_header:
+        header = {'cell_type': 'markdown', 'id': old_header['id'], 'metadata': {}, 'source': header['source']}
+    nb['cells'].insert(0, header)
 
     os.makedirs(os.path.dirname(os.path.abspath(nb_path)), exist_ok=True)
     with open(nb_path, 'w') as fh:
