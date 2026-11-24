@@ -25,6 +25,7 @@ dist/
 *.db-shm
 *.db-wal
 models/
+/*/lesson/data/
 
 # Env variants (keep the template)
 .env.*
