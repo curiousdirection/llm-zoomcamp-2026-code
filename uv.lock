@@ -551,25 +551,43 @@ name = "evaluation"
 version = "0.1.0"
 source = { virtual = "04-evaluation" }
 dependencies = [
+    { name = "gitsource" },
     { name = "minsearch" },
+    { name = "numpy" },
+    { name = "onnxruntime" },
     { name = "openai" },
     { name = "pandas" },
+    { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "requests" },
+    { name = "tokenizers" },
     { name = "toyaikit" },
     { name = "tqdm" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "huggingface-hub" },
+]
+
 [package.metadata]
 requires-dist = [
+    { name = "gitsource", specifier = ">=0.0.5" },
     { name = "minsearch", specifier = ">=0.2.0" },
+    { name = "numpy", specifier = ">=2.5.4" },
+    { name = "onnxruntime", specifier = ">=1.31.1" },
     { name = "openai", specifier = ">=3.39.0" },
     { name = "pandas", specifier = ">=3.1.0" },
+    { name = "pydantic", specifier = ">=2.14.1" },
     { name = "python-dotenv", specifier = ">=1.2.4" },
     { name = "requests", specifier = ">=2.34.2" },
+    { name = "tokenizers", specifier = ">=0.23.3" },
     { name = "toyaikit", specifier = ">=0.0.11" },
     { name = "tqdm", specifier = ">=4.70.1" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "huggingface-hub", specifier = ">=2.4.0" }]
 
 [[package]]
 name = "executing"
