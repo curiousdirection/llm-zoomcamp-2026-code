@@ -4,7 +4,7 @@
 
 | Question | Answer |
 |----------|--------|
-| Q1. Generating questions | |
+| Q1. Generating questions | 1400 |
 | Q2. First result with text search | |
 | Q3. First result with vector search | |
 | Q4. Evaluating text search | |
