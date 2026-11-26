@@ -34,5 +34,8 @@
   },
   "files.watcherExclude": {
     "course/**": true
+  },
+  "github.copilot.enable": {
+    "*": false
   }
 }
