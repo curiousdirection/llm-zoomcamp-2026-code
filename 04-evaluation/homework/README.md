@@ -9,9 +9,10 @@
 | Q3. First result with vector search | 01-agentic-rag/lessons/01-intro.md |
 | Q4. Evaluating text search | 0.76 |
 | Q5. Evaluating vector search | 0.55 |
-| Q6. Tuning hybrid search | |
+| Q6. Tuning hybrid search | 1 |
 
 - Solution: [homework.ipynb](homework.ipynb)
+- Correct answers: [hw4](https://courses.datatalks.club/llm-zoomcamp-2026/homework/hw4)
 
 ## Homework
 

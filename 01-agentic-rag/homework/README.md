@@ -12,7 +12,7 @@
 | Q6. Number of `search` calls | 4 |
 
 - Solution: [homework.ipynb](homework.ipynb)
-- Results: [hw1](https://courses.datatalks.club/llm-zoomcamp-2026/homework/hw1)
+- Correct answers: [hw1](https://courses.datatalks.club/llm-zoomcamp-2026/homework/hw1)
 
 ## Homework
 

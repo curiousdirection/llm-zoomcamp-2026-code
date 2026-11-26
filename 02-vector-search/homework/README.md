@@ -12,7 +12,7 @@
 | Q6. Hybrid search | 01-agentic-rag/lessons/13-function-calling.md |
 
 - Solution: [homework.ipynb](homework.ipynb)
-- Results: [hw2](https://courses.datatalks.club/llm-zoomcamp-2026/homework/hw2)
+- Correct answers: [hw2](https://courses.datatalks.club/llm-zoomcamp-2026/homework/hw2)
 
 ## Homework
 
