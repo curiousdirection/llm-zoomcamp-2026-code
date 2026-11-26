@@ -5,9 +5,9 @@
 | Question | Answer |
 |----------|--------|
 | Q1. Generating questions | 1400 |
-| Q2. First result with text search | |
-| Q3. First result with vector search | |
-| Q4. Evaluating text search | |
+| Q2. First result with text search | 01-agentic-rag/lessons/03-rag.md |
+| Q3. First result with vector search | 01-agentic-rag/lessons/01-intro.md |
+| Q4. Evaluating text search | 0.76 |
 | Q5. Evaluating vector search | |
 | Q6. Tuning hybrid search | |
 
