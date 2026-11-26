@@ -29,7 +29,7 @@ def calc_total_price(usages):
     return total_cost
 
 
-def llm_structured(client, instructions, user_prompt, output_type, model="gpt-5.4-mini"):
+def llm_structured(client, instructions, user_prompt, output_type, model="gpt-6-luna"):
     messages = [
         {"role": "developer", "content": instructions},
         {"role": "user", "content": user_prompt}
@@ -49,7 +49,7 @@ def llm_structured_retry(
     instructions,
     user_prompt,
     output_type,
-    model="gpt-5.4-mini",
+    model="gpt-6-luna",
     max_retries=3,
 ):
     for attempt in range(max_retries):
