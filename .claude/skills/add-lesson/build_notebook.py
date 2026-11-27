@@ -3,14 +3,19 @@
 Reads course/<module>/<NN>-*.md and appends it to <module>/lesson/lesson.ipynb in the
 layout used by 02-vector-search/lesson/lesson.ipynb:
 
-- module header cell: title + list of the lessons in this notebook (rebuilt on every run)
-- per lesson: `---` + `# Lesson NN: Title` + Source/Video line + text before the first `##`
+- module header cell: title + list of the lessons in this notebook, each linking to its
+  lesson's anchor (rebuilt on every run)
+- per lesson: `---` + `<a id="lesson-NN"></a>` + `# Lesson NN: Title` + Source/Video line +
+  text before the first `##`
 - one markdown cell per `##` section; each ```python block becomes its own (unrun) code cell,
   other fenced blocks (bash, toml, text...) stay inside the markdown
 - relative links/images are rewritten to point into course/
 
 Usage (from the repo root):
     python3 .claude/skills/add-lesson/build_notebook.py 04-evaluation 03 [04 ...]
+
+With no lesson numbers it only rebuilds the header and adds missing anchors (use --notebook
+for the split notebooks).
 """
 
 import argparse
@@ -46,6 +51,20 @@ def md(text):
 def code(text):
     return {'cell_type': 'code', 'execution_count': None, 'metadata': {}, 'outputs': [],
             'source': to_source(text.strip('\n'))}
+
+
+def anchor(num):
+    return f'<a id="lesson-{num}"></a>'
+
+
+def add_missing_anchors(cells):
+    """Insert the anchor above `# Lesson NN:` headers that predate anchors."""
+    for c in cells:
+        src = ''.join(c['source'])
+        new = re.sub(r'^(?<!</a>\n\n)# Lesson (\d+):', lambda m: f'{anchor(m.group(1))}\n\n{m.group(0)}',
+                     src, flags=re.M)
+        if new != src:
+            c['source'] = to_source(new)
 
 
 def read_module(module):
@@ -89,7 +108,7 @@ def lesson_cells(module, lesson, course_rel):
     video = re.search(r'video_url:\s*"?([^"\s]+)"?', front)
     body = re.sub(r'^\s*# .*\n', '', body.lstrip('\n'), count=1)  # drop the H1, replaced by ours
 
-    header = f'---\n\n# Lesson {num}: {title}\n\nSource: [`{filename}`]({course_rel}/{module}/{filename})'
+    header = f'---\n\n{anchor(num)}\n\n# Lesson {num}: {title}\n\nSource: [`{filename}`]({course_rel}/{module}/{filename})'
     if video:
         header += f' · Video: [YouTube]({video.group(1)})'
 
@@ -107,7 +126,7 @@ def lesson_cells(module, lesson, course_rel):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('module', help='module folder name, e.g. 04-evaluation')
-    parser.add_argument('lessons', nargs='+', help='lesson numbers, e.g. 03 04')
+    parser.add_argument('lessons', nargs='*', help='lesson numbers, e.g. 03 04')
     parser.add_argument('--notebook', help='write elsewhere, e.g. for a dry run (default: <module>/lesson/lesson.ipynb)')
     args = parser.parse_args()
 
@@ -122,6 +141,7 @@ def main():
     else:
         nb = {'cells': [], 'metadata': KERNEL_METADATA, 'nbformat': 4, 'nbformat_minor': 5}
     nb['cells'] = [c for c in nb['cells'] if ''.join(c['source']).strip()]  # drop blank placeholder cells
+    add_missing_anchors(nb['cells'])
     old_header = {}
     if nb['cells'] and ''.join(nb['cells'][0]['source']).startswith('# Module'):
         old_header = nb['cells'].pop(0)  # rebuilt below
@@ -139,7 +159,7 @@ def main():
         print(f'Lesson {num}: added {len(cells)} cells ({n_code} code)')
 
     present = {m for c in nb['cells'] for m in re.findall(r'^# Lesson (\d+):', ''.join(c['source']), re.M)}
-    listing = '\n'.join(f'- **Lesson {n}** - {t} (`{f}`)' for n, t, f in lessons if n in present)
+    listing = '\n'.join(f'- [**Lesson {n}** - {t}](#lesson-{n}) (`{f}`)' for n, t, f in lessons if n in present)
     header = md(
         f'# {module_title}\n\nLessons from [`course/{args.module}`]({course_rel}/{args.module}/) '
         f'in this notebook, one section per lesson:\n\n{listing}')

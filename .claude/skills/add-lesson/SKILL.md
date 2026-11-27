@@ -41,7 +41,9 @@ python3 .claude/skills/add-lesson/build_notebook.py <module> <NN> [<NN> ...] [--
 ```
 
 Run it from the repo root. It defaults to `<module>/lesson/lesson.ipynb`, creates the notebook if
-needed, and skips lessons already present. Never hand-edit the copied text: keep it verbatim,
+needed, and skips lessons already present. Each lesson header gets an `<a id="lesson-NN"></a>`
+anchor, and the TOC in the module header cell links to them. With no lesson numbers, the script
+only rebuilds the TOC and adds any missing anchors. Never hand-edit the copied text: keep it verbatim,
 including the course's model names in code (e.g. `gpt-5.4-mini`).
 
 ## 4. Check what the lesson needs
